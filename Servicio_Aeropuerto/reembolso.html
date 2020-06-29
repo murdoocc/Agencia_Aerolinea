@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://getbootstrap.com/docs/4.1/components/navbar/#nav">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/styleIndex.css">
+
+    <title>Reembolso</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">
+            <img src="images/header-text.png" width="100" height="45" alt="">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="findBoleto.html">Buscar mi boleto</a>
+              </li>
+            </ul>
+            <a href="login.html">Ingresa...</a>
+          </div>
+        </nav>
+    </header>
+
+    <div class="container">
+      <form action='http://localhost/Servicio_Aeropuerto/php/reembolso.php' method='post' name="f1">";
+               
+        <div class='form-group col-md-5'>
+          <label for='fecha'>Tarjeta</label>
+          <input type='text' class='form-control' name='tarjeta' placeholder='Numero de tarjeta' >
+        </div>
+
+        
+        <div class='form-group col-md-5'>
+            <label for='coste'>Costo del vuelo a reembolsar</label>
+            <input type='text' class='form-control' id='coste' placeholder='Cantidad a reembolsar' name='coste'  readonly>
+        </div>
+
+        <button type='submit' class='form-group btn btn-primary col-md-5'>Enviar solicitud</button>
+      </form>
+    </div>
+
+    <script>
+      var URLactual = window.location.search.substring(1);
+      var sURLVariables = URLactual.split('&');      
+      var cost = 0;
+      for (var i = 0; i < sURLVariables.length; i++) {
+        var sParametro = sURLVariables[i].split('=');
+        if (sParametro[0] == "coste") {
+          cost = sParametro[1];
+        }
+      }
+
+      document.f1.coste.value = cost;
+      
+      
+    </script>
+
+</body>
+</html>

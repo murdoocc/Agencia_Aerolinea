@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AERO-TEC</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styleLogin.css">
+
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.min.css">
+</head>
+<body>
+    <div class="container" id="boletillo">
+        <div class="row text-center login-page">
+	   <div class="col-md-12 login-form">
+	      <form action="" method=""> 			
+	         <div class="row">
+		    <div class="col-md-12 login-form-header">
+		       <p class="login-form-font-header">AERO<span>TEC</span><p>
+		    </div>
+		</div>
+		<div class="row">
+		   <div class="col-md-12 login-from-row">
+              <input name="nombre" type="text" placeholder="Escribe tu nombre completo..." id="nombre" required/>
+              <!--<input name="nombre" placeholder="¿Algun destino particular?" aria-label="Search" onkeyup="filtra(this.value)">-->
+           </div>
+           <div class="col-md-12 login-form-row ">
+            <input type="text" id="date_from" class="date_from" placeholder="¿Cuándo se va?" name="fecha" />
+            </div>
+           
+		</div>		
+		<div class="row">
+		   <div class="col-md-12 login-from-row">
+		      <button class="btn btn-info" onclick="filtra()">Buscar</button>
+		   </div>
+		</div>
+	    </form>
+	</div>
+     </div>
+  </div>
+
+  <script type="text/javascript">
+    function filtra(){
+        boleto = document.getElementById("nombre").value;
+        fecha = document.getElementById("date_from").value;
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("boletillo").innerHTML = this.responseText;
+        }
+      };
+      xmlhttp.open("GET", "php/findBoleto.php?nombre=" + boleto + "&fecha=" + fecha, false);
+      xmlhttp.send();
+    }
+  </script>
+
+  <!-- JS -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

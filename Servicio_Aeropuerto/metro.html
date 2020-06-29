@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://getbootstrap.com/docs/4.1/components/navbar/#nav">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/styleLogin.css">
+
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.min.css">    
+    
+    <title>METRO-TEC</title>    
+</head>
+<body>    
+    <header class="header">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+          <img src="images/header-text.png" width="100" height="45" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="findBoletoMetro.html">Buscar mi boleto</a>
+            </li>
+          </ul>
+          <!--action="http://localhost/Servicio_Aeropuerto/showDestino.php" method="post"-->
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="digita el ID de tu boleto" aria-label="Search" onkeyup="filtra(this.value)">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+            onclick="filtra(destino)">Buscar</button>
+          </form>
+          <a href="login.html">Ingresa...</a>
+        </div>
+      </nav>
+    </header>    
+    <br>
+    
+    <div class="container">
+      <form class="login-form" name="f1" action='http://localhost/Servicio_Aeropuerto/php/addBoletoMetro.php' method='post'>
+        <div class="row">
+          <div class="col-md-1 login-from-row">
+            <input name="idBoleto" type="hidden" placeholder="Aqui va el ID del boleto" required/>
+          </div>
+
+          <div class="col-md-0 login-from-row">
+            <input name="precio" type="hidden" placeholder="Aqui va el precio" required/>
+          </div>
+
+          <div class="col-md-0 login-from-row">
+            <input name="origen" type="hidden" placeholder="Selecciona tu origen" required/>
+          </div>    
+        
+          <div class="col-md-0 login-from-row">
+            <input name="destino" type="hidden" placeholder="Selecciona tu destino" required/>
+          </div>
+          
+          <div class="col-md-3 login-from-row">
+            <input type="text" id="date_from" class="date_from" placeholder="¿Cuándo se va?" name="fecha" />
+          </div>    
+          
+          <div class="col-md-2 login-from-row">
+            <select name="vagon">
+              <option>Selecciona un vagon</option>
+              <option>General</option>
+              <option>Discapacidad</option>
+              <option>3ra Edad</option>
+              <option>Mujeres</option>
+            </select>
+          </div>            
+
+          <div class="col-md-3 login-from-row">
+            <select name="pago">
+              <option>Selleciona forma de pago</option>
+              <option>Tarjeta del Metro</option>
+              <option>Tarjeta de Debito</option>
+              <option>Tarjeta de Credito </option>
+              <option>Efectivo</option>
+            </select>
+          </div>           
+        
+          <div class="col-md-2 login-from-row">
+            <button class="btn btn-info">Comprar boleto</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <br>
+    
+    <div class="container" id="cards">              
+      
+    </div>
+
+    <script type="text/javascript">
+      function load_html(){
+        var URLactual = window.location.search.substring(1);
+        var sURLVariables = URLactual.split('=');
+        var linea = sURLVariables[1];
+        var xml=new XMLHttpRequest();
+        if(xml){
+          xml.open("GET", "php/showAllMetro.php?linea="+linea, false);
+          xml.send(null);
+          document.getElementById('cards').innerHTML=xml.responseText;
+        }
+      }
+      window.onload=load_html;
+    </script>
+
+    <script type="text/javascript">
+      function elegirOrigen(ori){
+        //Recupero el string que contiene el nombre de la estacion y el precio por boleto
+        //Hago uso de split para separar el precio del nombre
+        var spl = ori.split('+');
+        //Cómo el valor del precio es según su valor en moneda, entonces divido una vez el precio de su valor
+        var spl2 = spl[1].split(' ');
+        //spl[0] = nombre de la estacion //spl2[0] = precio
+        document.f1.origen.value = spl[0];
+        document.f1.precio.value = spl2[0];
+        //Variable que guarda el input que tiene el nombre de la estación de origen
+        var saveo = document.f1.origen.value;
+        alert("Haz seleccionado tu origen "+ saveo + ". Ahora selecciona tu destino");        
+      }
+    </script>
+
+<script type="text/javascript">
+  function elegirDestino(des){
+    document.f1.destino.value = des;
+    var saved = document.f1.destino.value;
+    //Generar id    
+    var idp1 = Math.floor(Math.random() * 999999);
+    var idp2 = Math.floor(Math.random() * 999999);
+    var idp3 = idp1 + idp2;
+    document.f1.idBoleto.value = idp3;
+    confirm("Destino "+ saved + " seleccionado. Ya puedes comprar tu boleto");
+    alert("Para poder consultar despues tu boleto, guarda este ID: " + idp3);
+  }
+</script>
+
+<script type="text/javascript">
+  function filtra(idbol){
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("cards").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET", "php/findBoletoMetro.php?idBoleto=" + idbol, true);
+    xmlhttp.send();
+  }
+</script>
+
+    <!-- librería para generar UUIDs que implementa el estándar RFC4122.-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
+      <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+<!--Estas cartas son las mejor hasta ahora
+    Creditos: https://codea.app/bootstrap/tarjetas-responsive-con-bootstrap
+    Login
+    http://www.formacionwebonline.com/login-sencillo-estilos-bootstrap-responsive-free-gratis/
+    Ajax
+    https://www.adaweb.es/ejemplo-php-ajax/ 
+    Sesiones
+    https://code.tutsplus.com/es/tutorials/how-to-use-sessions-and-session-variables-in-php--cms-31839
+    Estilos y tipos de botones de bootstrap
+    https://getbootstrap.com/docs/4.0/components/buttons/
+  -->  
+</html>

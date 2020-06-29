@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AERO-TEC</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+    <!--<div class="container">-->       
+        
+        <div class="container">   
+            <div class="header">
+                <img src="images/header-text.png" alt="">            
+            </div>                    
+            <form action="http://localhost/Servicio_Aeropuerto/php/addDestino.php" method="post">    
+                <!--<div class="form-group">-->
+                    <div class="form-destination"></div>
+                        <label for="destination">Nombre del Avion</label>
+                        <input type="text" id="destination" name="avion" placeholder="Digita al avion" />
+                    
+                    <div class="form-destination">
+                        <label for="destination">Nombre del destino</label>
+                        <input type="text" id="destination" name="destino" placeholder="¿A donde se dirige?" />
+                    </div>
+                    <div class="form-date-from form-icon">
+                        <label for="date_from">Fecha de vuelo</label>
+                        <input type="text" id="date_from" class="date_from" placeholder="¿Cuándo se va?" name="fecha_vuelo" />
+                        <!-- <span class="icon"><i class="zmdi zmdi-calendar-alt"></i></span> -->
+                    </div>
+                    <div class="form-destination">
+                        <label for="destination">Precio del vuelo</label>
+                        <input type="text" id="destination" name="costo" placeholder="¿Cuál es el precio?" />
+                    </div>
+                    <div class="form-destination">
+                        <label for="destination">Hora de vuelo</label>
+                        <input type="text" id="destination" name="hora_salida" placeholder="¿Ah qué hora se va?" />
+                    </div>                    
+                    <div class="form-submit">
+                        <input type="submit" id="submit" class="submit" value="Registrar vuelo" />
+                    </div>
+                <!--   </div>-->
+            </form>            
+        </div>
+
+    <!--</div>-->
+
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="js/main.js"></script>
+    
+</body>
+</html>

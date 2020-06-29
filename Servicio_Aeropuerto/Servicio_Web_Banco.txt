@@ -1,0 +1,63 @@
+SERVICIO BANCO - http://3.83.142.54:8080/banco.wsdl
+Tarjeta - String
+1234567887654321
+
+Caducidad - String
+0121
+
+CVV - Entero
+123
+
+Monto - Entero
+1234
+
+Peticion
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ban="http://cobrar.me/Banco">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ban:CobrarRequest>
+         <ban:tarjeta>1234567887654321</ban:tarjeta>
+         <ban:caducidad>0121</ban:caducidad>
+         <ban:cvv>123</ban:cvv>
+         <ban:monto>1234</ban:monto>
+      </ban:CobrarRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+Respuesta
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <ns2:CobrarResponse xmlns:ns2="http://cobrar.me/Banco">
+         <ns2:respuesta>Cargo en proceso...
+La tarjeta: 4321 pertenece a otro banco.
+En seguida estableceremos una conexion con el para poder realizar el cargo...
+Banco 1: Se ha realizado un cargo a la tarjeta ejecutiva con terminacion:XXXX-XXXX-XXXX-4321 por la cantidad de: $1234.00 con número de autorización</ns2:respuesta>
+      </ns2:CobrarResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+Peticion Rembolso
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ban="http://cobrar.me/Banco">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ban:ReembolsoRequest>
+         <ban:tarjeta>1234567887654321</ban:tarjeta>
+         <ban:monto>1234</ban:monto>
+      </ban:ReembolsoRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+Respuesta Rembolso
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <ns2:ReembolsoResponse xmlns:ns2="http://cobrar.me/Banco">
+         <ns2:respuesta>La tarjeta: XXXX-XXXX-XXXX-4321 pertenece a otro banco. En seguida estableceremos una conexion con el para poder otorgarle su reembolso...
+Banco 1: Se ha realizado un reeembolso a la tarjeta ejecutiva con terminacion: XXXX-XXXX-XXXX-4321 por la cantidad de: $1234.00
+Gracias por su confianza</ns2:respuesta>
+      </ns2:ReembolsoResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+

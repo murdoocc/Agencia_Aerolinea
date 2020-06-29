@@ -1,0 +1,44 @@
+Servicio Metro - http://3.91.49.75:8080/ProyectoMetro.wsdl
+
+Lista estaciones - Request
+<proy:linea>1</proy:linea>
+
+Lista estaciones - Response
+<ns2:zona>CDMX</ns2:zona>
+<ns2:precio>5 Pesos Mexicanos</ns2:precio>
+<ns2:nombre>Observatirio, Tacubaya, Juanacatlan, Chapultepec, Sevilla, Insurgentes, Cuahutemoc, Balderas, Salto del Agua, Isabel la Catolica, Pino Suarez, Merced, Candelaria, San Lazaro, Moctezuma, Balbuena, Blvd. Puerto Aereo, Gomez Farias, Zaragoza, Pantitlan</ns2:nombre>
+<ns2:linea>1</ns2:linea>
+
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <ns2:ListaEstacionesResponse xmlns:ns2="http://www.example.org/ProyectoMetro">
+         <ns2:zona>Londres</ns2:zona>
+         <ns2:precio>4.90 Euros</ns2:precio>
+         <ns2:nombre>Aldgate, Bank, Barbican, Blackfriars, Cannon Street, Chancery Lane, Liverpool Street, Masion House, Monument, Moorgate, St. Pauls, Tower Gateway</ns2:nombre>
+         <ns2:linea>2</ns2:linea>
+      </ns2:ListaEstacionesResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+- 1 CDMX - 5 pesos mexicanos
+- 2 Londres - 4.90 Euros
+- 3 Guangzhou - 2 yuanes
+- 4 Paris - 1.90 Euros
+- 5 Madrid - 1.50 Euros
+- 6 Tokio - 600 Yenes
+- 7 Moscu - 57 Rublos
+- 8 Nueva York - 2.75 Dolares
+- 9 Nueva Delhi - 10 Rupias
+- 10 Buenos Aires - 7.5 Pesos Argentinos
+
+Comprar boleto Request
+<proy:ComprarBoletoRequest>
+         <proy:idBoleto>1</proy:idBoleto> - INT
+         <proy:fechaPartida>15/06/20</proy:fechaPartida> - String
+         <proy:estacionOrigen>Aldgate</proy:estacionOrigen> - String
+         <proy:estacionDestino>Blackfriars</proy:estacionDestino> - String
+         <proy:elegirVagon>3</proy:elegirVagon> - String
+         <proy:ingresaMetodoPago>Efectivo</proy:ingresaMetodoPago> - String
+      </proy:ComprarBoletoRequest>

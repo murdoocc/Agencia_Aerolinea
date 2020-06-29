@@ -1,0 +1,23 @@
+.header .navbar {
+    /*background-image: url("../images/fondo.jpg");*/
+    /*background-size: cover;*/
+    /*min-height: 100vh;*/    
+    /*border-bottom: 100px;*/
+    /*background-color: transparent !important;*/
+}
+
+  body{
+    background-image: url("../images/fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    
+  }
+
+  label {
+    color: aliceblue;    
+  }
